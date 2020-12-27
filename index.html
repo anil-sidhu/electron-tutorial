@@ -1,13 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Electron Tutorial</title>
 </head>
+<style>
+    li {
+        display: inline;
+    }
+
+    ul {
+        border-bottom: 1px solid orange;
+        margin: 0px;
+        display: flex;
+        width: 300px;
+    }
+
+    ul li {
+        width: 100px;
+    }
+</style>
+
 <body>
     <h1>Hello Electron</h1>
-    <h1>Code Step By Step</h1>
+    <input type="text" id="name" placeholder="enter name" />
+    <br>
+    <br>
+    <input type="text" id="age" placeholder="enter age" />
+    <br>
+    <br><input type="text" id="email" placeholder="enter email" />
+    <br>
+    <br>
+    <button onclick="save()">Add to List</button>
+
+    <br>
+    <br>
+    <ul id="">
+        <li>Name </li>
+        <li>Age</li>
+        <li> Email</li>
+
+    </ul>
+    <div id="myList">
+    </div>
+
 
 </body>
+<script>
+    let collection = []
+
+    function save() {
+        let name = document.getElementById('name').value;
+        let age = document.getElementById('age').value;
+        let email = document.getElementById('email').value;
+        collection.push({ name, age, email })
+        console.warn(collection);
+
+        if (name == "") {
+            alert("name is not correct")
+            return false
+        }
+
+        var textnode = document.createElement(`div`);
+        textnode.innerHTML = `<ul class="inner">
+    <li>${name}</li>
+    <li>${age}</li>
+        <li>${email}</li>
+    </ul`
+        document.getElementById("myList").appendChild(textnode);
+
+        // showList()
+
+    }
+    function showList() {
+        let listContainer = document.createElement('div'),
+            listItem = "",
+            i;
+        listElement = document.createElement('ul');
+
+        document.getElementsByTagName('body')[0].appendChild(listContainer);
+
+        listContainer.appendChild(listElement);
+
+        for (let i = 0; i < collection.length; ++i) {
+            listItem = document.createElement('li');
+            listItem.innerHTML = collection[i].name + " " + collection[i].age + " " + collection[i].email;
+            listElement.appendChild(listItem);
+        }
+
+    }
+
+</script>
+
 </html>
